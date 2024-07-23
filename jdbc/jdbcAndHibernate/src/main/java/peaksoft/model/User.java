@@ -1,16 +1,27 @@
 package peaksoft.model;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import  jakarta.persistence.*;
+import lombok.ToString;
 
 @Table
+@Entity(name = "users")
+@AllArgsConstructor
+@ToString
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "student_gen")
+    @SequenceGenerator(name = "student_gen",
+    sequenceName = "student_seq",
+    allocationSize = 1,
+    initialValue = 1)
     private Long id;
 
     @Column
     private String name;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 
     @Column
@@ -24,7 +35,6 @@ public class User {
         this.lastName = lastName;
         this.age = age;
     }
-
     public Long getId() {
         return id;
     }
